@@ -1,0 +1,4 @@
+Sequence														SfV							Kinect
+Handball (R-H Volley) 											51							-85
+
+deltaTime = 26 ms

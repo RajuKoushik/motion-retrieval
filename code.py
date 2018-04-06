@@ -108,32 +108,6 @@ for x in range(28, 7392):
     x = x + 28
 print (answe)
 
-from mpl_toolkits.mplot3d import Axes3D
-import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
-
-fig = plt.figure()
-ax = Axes3D(fig)
-
-
-
-ax = plt.axes(projection='3d')
-zline = array(bigX[0][0])
-xline = array(bigX[0][1])
-yline = array(bigX[0][2])
-
-ax.scatter(xs=zline[:-1], ys=xline[:-1], zs=yline[:-1], zdir='z', label='ys=0, zdir=z')
-plt.show()
-
-
-
-print(zline[:-1])
-print(xline[:-1])
-print(yline[:-1])
-
-ax.plot3D(xline, yline, zline, 'gray')
-plt.show()
 
 numpyArray = array(answe)
 
@@ -154,6 +128,37 @@ pred = kmeans.predict(numArray)
 poi = "poi"
 
 print (kmeans.cluster_centers_)
+
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as plt
+
+fig = plt.figure()
+ax = Axes3D(fig)
+
+
+
+ax = plt.axes(projection='3d')
+zline = array(bigX[5][0])
+xline = array(bigX[5][1])
+yline = array(bigX[5][2])
+
+ax.scatter(xs=zline[:-1], ys=xline[:-1], zs=yline[:-1], zdir='z', label='ys=0, zdir=z')
+plt.show()
+
+
+
+
+
+print(zline[:-1])
+print(xline[:-1])
+print(yline[:-1])
+
+ax.plot3D(xline, yline, zline, 'gray')
+plt.show()
+
+
 
 #pl.scatter(numArray[:, 0], numArray[:, 0], c=kmeans.labels_)
 #pl.show()

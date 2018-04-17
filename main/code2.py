@@ -26,7 +26,9 @@ import random
 # generating random numbers
 
 
-random_list = random.sample(range(1, 400), 300)
+random_list1 = random.sample(range(1, 400), 300)
+
+random_list = sorted(random_list1)
 
 print (random_list)
 
@@ -101,7 +103,7 @@ for i in range(0, len(random_list)):
         flag += 20
 
         answer.append(tempSum)
-#print (answer)
+# print (answer)
 print (linesOne)
 
 numpyArray = array(answer)
@@ -123,3 +125,28 @@ pred = kmeans.predict(numArray)
 poi = "poi"
 
 print (kmeans.cluster_centers_)
+
+# walk model
+
+sum_walk = 0
+
+for p in range(0, len(random_list)):
+    if (random_list[p] >= 40):
+        break
+
+    filename = file_prefix + str(random_list[p]) + '.txt'
+    print (filename)
+
+    lines = open(filename).read().splitlines()
+    print (len(lines))
+    sub_length_walk = len(lines)
+    sum_walk += sub_length_walk
+
+counter_walk = sum_walk / 20
+
+walk_model = [[0] * 100 for i in range(100)]
+
+for l in range(1, int(counter_walk)):
+    walk_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+
+print (walk_model)

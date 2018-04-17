@@ -150,3 +150,31 @@ for l in range(1, int(counter_walk)):
     walk_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
 
 print (walk_model)
+
+# grab model
+
+sum_grab = 0
+
+for p in range(0, len(random_list)):
+    if (random_list[p] >= 40 and random_list[p] < 80):
+        filename = file_prefix + str(random_list[p]) + '.txt'
+        print (filename)
+
+        lines = open(filename).read().splitlines()
+        print (len(lines))
+        sub_length_grab = len(lines)
+        sum_grab += sub_length_grab
+    else:
+
+        break
+
+counter_grab = sum_grab / 20
+
+grab_model = [[0] * 100 for i in range(100)]
+
+for l in range(1, int(counter_grab)):
+    grab_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+
+print (grab_model)
+
+

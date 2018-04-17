@@ -177,4 +177,106 @@ for l in range(1, int(counter_grab)):
 
 print (grab_model)
 
+# watch clock model
 
+sum_watch = 0
+
+for p in range(0, len(random_list)):
+    if (random_list[p] >= 80 and random_list[p] < 120):
+        filename = file_prefix + str(random_list[p]) + '.txt'
+        print (filename)
+
+        lines = open(filename).read().splitlines()
+        print (len(lines))
+        sub_length_watch = len(lines)
+        sum_watch += sub_length_watch
+    else:
+
+        break
+
+counter_watch = sum_watch / 20
+
+watch_model = [[0] * 100 for i in range(100)]
+
+for l in range(1, int(counter_watch)):
+    watch_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+
+print (watch_model)
+
+# phone
+
+sum_phone = 0
+
+for p in range(0, len(random_list)):
+    if (random_list[p] >= 120 and random_list[p] < 160):
+        filename = file_prefix + str(random_list[p]) + '.txt'
+        print (filename)
+
+        lines = open(filename).read().splitlines()
+        print (len(lines))
+        sub_length_phone = len(lines)
+        sum_phone += sub_length_phone
+    else:
+
+        break
+
+counter_phone = sum_phone / 20
+
+phone_model = [[0] * 100 for i in range(100)]
+
+for l in range(1, int(counter_phone)):
+    phone_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+
+print (phone_model)
+
+# cross arms
+
+sum_arms = 0
+
+for p in range(0, len(random_list)):
+    if (random_list[p] >= 160 and random_list[p] < 200):
+        filename = file_prefix + str(random_list[p]) + '.txt'
+        print (filename)
+
+        lines = open(filename).read().splitlines()
+        print (len(lines))
+        sub_length_arms = len(lines)
+        sum_arms += sub_length_arms
+    else:
+
+        break
+
+counter_arms = sum_arms / 20
+
+arms_model = [[0] * 100 for i in range(100)]
+
+for l in range(1, int(counter_arms)):
+    arms_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+
+print (arms_model)
+
+# cross seat
+
+sum_seat = 0
+
+for p in range(0, len(random_list)):
+    if (random_list[p] >= 200 and random_list[p] < 240):
+        filename = file_prefix + str(random_list[p]) + '.txt'
+        print (filename)
+
+        lines = open(filename).read().splitlines()
+        print (len(lines))
+        sub_length_seat = len(lines)
+        sum_seat += sub_length_seat
+    else:
+
+        break
+
+counter_seat = sum_seat / 20
+
+seat_model = [[0] * 100 for i in range(100)]
+
+for l in range(1, int(counter_seat)):
+    seat_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+
+print (seat_model)

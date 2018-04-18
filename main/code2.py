@@ -151,7 +151,7 @@ counter_walk = sum_walk / 20
 walk_model = [[0] * 100 for i in range(100)]
 
 for l in range(1, int(counter_walk)):
-    walk_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+    walk_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_walk
 
 print (walk_model)
 
@@ -178,7 +178,7 @@ counter_grab = sum_grab / 20
 grab_model = [[0] * 100 for i in range(100)]
 
 for l in range(total_sum, total_sum + int(counter_grab)):
-    grab_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+    grab_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_grab
 
 print (grab_model)
 
@@ -205,7 +205,7 @@ counter_watch = sum_watch / 20
 watch_model = [[0] * 100 for i in range(100)]
 
 for l in range(total_sum, total_sum + int(counter_watch)):
-    watch_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+    watch_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_watch
 
 print (watch_model)
 
@@ -232,7 +232,7 @@ counter_head = sum_head / 20
 head_model = [[0] * 100 for i in range(100)]
 
 for l in range(total_sum, total_sum + int(counter_head)):
-    head_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+    head_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_head
 
 print (head_model)
 
@@ -259,7 +259,7 @@ counter_phone = sum_phone / 20
 phone_model = [[0] * 100 for i in range(100)]
 
 for l in range(total_sum, total_sum + int(counter_phone)):
-    phone_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+    phone_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_phone
 
 print (phone_model)
 
@@ -286,7 +286,7 @@ counter_arms = sum_arms / 20
 arms_model = [[0] * 100 for i in range(100)]
 
 for l in range(total_sum, total_sum + int(counter_arms)):
-    arms_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+    arms_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_arms
 
 print (arms_model)
 
@@ -313,7 +313,7 @@ counter_seat = sum_seat / 20
 seat_model = [[0] * 100 for i in range(100)]
 
 for l in range(total_sum, total_sum + int(counter_seat)):
-    seat_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+    seat_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_seat
 
 print (seat_model)
 
@@ -340,7 +340,7 @@ counter_punch = sum_punch / 20
 punch_model = [[0] * 100 for i in range(100)]
 
 for l in range(total_sum, total_sum + int(counter_punch)):
-    punch_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+    punch_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_punch
 
 print (punch_model)
 
@@ -367,7 +367,7 @@ counter_kick = sum_kick / 20
 kick_model = [[0] * 100 for i in range(100)]
 
 for l in range(total_sum, total_sum + int(counter_kick)):
-    kick_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+    kick_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_kick
 
 print (kick_model)
 
@@ -392,7 +392,7 @@ counter_wave = sum_wave / 20
 wave_model = [[0] * 100 for i in range(100)]
 
 for l in range(total_sum, total_sum + int(counter_wave)):
-    wave_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1
+    wave_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_wave
 
 print (wave_model)
 

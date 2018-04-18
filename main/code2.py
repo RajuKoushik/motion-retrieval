@@ -159,8 +159,8 @@ total_sum = total_sum + int(counter_walk)
 
 sum_grab = 0
 
-for p1 in range(0, len(random_list)):
-    if (random_list[p1] >= 40 and random_list[p1] < 80):
+for p in range(0, len(random_list)):
+    if (random_list[p] >= 40 and random_list[p] < 80):
         filename = file_prefix + str(random_list[p]) + '.txt'
         print (filename)
 
@@ -168,7 +168,7 @@ for p1 in range(0, len(random_list)):
         print (len(lines))
         sub_length_grab = len(lines)
         sum_grab += sub_length_grab
-    if (random_list[p1] >= 80):
+    if (random_list[p] >= 80):
         break
 
 counter_grab = sum_grab / 20
@@ -186,8 +186,8 @@ total_sum = total_sum + int(counter_grab)
 
 sum_watch = 0
 
-for p1 in range(0, len(random_list)):
-    if (random_list[p1] >= 80 and random_list[p1] < 120):
+for p in range(0, len(random_list)):
+    if (random_list[p] >= 80 and random_list[p] < 120):
         filename = file_prefix + str(random_list[p]) + '.txt'
         print (filename)
 
@@ -222,7 +222,7 @@ for p in range(0, len(random_list)):
         print (len(lines))
         sub_length_head = len(lines)
         sum_head += sub_length_head
-    if (random_list[p1] >= 160):
+    if (random_list[p] >= 160):
         break
 
 counter_head = sum_head / 20
@@ -249,7 +249,7 @@ for p in range(0, len(random_list)):
         print (len(lines))
         sub_length_phone = len(lines)
         sum_phone += sub_length_phone
-    if (random_list[p1] >= 200):
+    if (random_list[p] >= 200):
         break
 
 counter_phone = sum_phone / 20
@@ -276,7 +276,7 @@ for p in range(0, len(random_list)):
         print (len(lines))
         sub_length_arms = len(lines)
         sum_arms += sub_length_arms
-    if (random_list[p1] >= 240):
+    if (random_list[p] >= 240):
         break
 
 counter_arms = sum_arms / 20
@@ -303,7 +303,7 @@ for p in range(0, len(random_list)):
         print (len(lines))
         sub_length_seat = len(lines)
         sum_seat += sub_length_seat
-    if (random_list[p1] >= 280):
+    if (random_list[p] >= 280):
         break
 
 counter_seat = sum_seat / 20
@@ -330,7 +330,7 @@ for p in range(0, len(random_list)):
         print (len(lines))
         sub_length_punch = len(lines)
         sum_punch += sub_length_punch
-    if (random_list[p1] >= 320):
+    if (random_list[p] >= 320):
         break
 
 counter_punch = sum_punch / 20
@@ -357,7 +357,7 @@ for p in range(0, len(random_list)):
         print (len(lines))
         sub_length_kick = len(lines)
         sum_kick += sub_length_kick
-    if (random_list[p1] >= 360):
+    if (random_list[p] >= 360):
         break
 
 counter_kick = sum_kick / 20
@@ -395,3 +395,10 @@ for l in range(total_sum, total_sum + int(counter_wave)):
 print (wave_model)
 
 total_sum = total_sum + int(counter_wave)
+
+# testing
+# lets take a motion sequence for testing one from each of the 10 actions
+
+#we try to predict the cluster of the skeleton using the predict function of kmeans in sckit learn library
+
+print(kmeans.predict(1.22))

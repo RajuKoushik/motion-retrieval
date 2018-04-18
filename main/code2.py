@@ -42,6 +42,8 @@ listOne = [] * 10000
 
 linesOne = [0] * 100
 
+# lines one has the first reference skeleton
+
 spineX = 0
 spineY = 0
 spineZ = 0
@@ -375,8 +377,8 @@ total_sum = total_sum + int(counter_kick)
 
 sum_wave = 0
 
-for p in range(0, len(random_list)):
-    if (random_list[p] >= 360 and random_list[p] < 400):
+for p in range(0, len(random_list) - 5):
+    if (random_list[p] >= 360 and random_list[p] < 399):
         filename = file_prefix + str(random_list[p]) + '.txt'
         print (filename)
 
@@ -399,6 +401,95 @@ total_sum = total_sum + int(counter_wave)
 # testing
 # lets take a motion sequence for testing one from each of the 10 actions
 
-#we try to predict the cluster of the skeleton using the predict function of kmeans in sckit learn library
+# we try to predict the cluster of the skeleton using the predict function of kmeans in sckit learn library
+
+testing_list_1 = []
+testing_list_2 = []
+testing_list_3 = []
+testing_list_4 = []
+testing_list_5 = []
+testing_list_6 = []
+testing_list_7 = []
+testing_list_8 = []
+testing_list_9 = []
+testing_list_10 = []
+
+for i in range(1, 401):
+    if i in random_list:
+        continue
+    else:
+        # this is our left over testing data which we are gonna work on
+        if i < 40:
+            testing_list_1.append(i)
+        elif 40 <= i < 80:
+            testing_list_2.append(i)
+        elif 80 <= i < 120:
+            testing_list_3.append(i)
+        elif 120 <= i < 160:
+            testing_list_4.append(i)
+        elif 160 <= i < 200:
+            testing_list_5.append(i)
+        elif 200 <= i < 240:
+            testing_list_6.append(i)
+        elif 240 <= i < 280:
+            testing_list_7.append(i)
+        elif 280 <= i < 320:
+            testing_list_8.append(i)
+        elif 320 <= i < 360:
+            testing_list_9.append(i)
+        else:
+            testing_list_10.append(i)
 
 print(kmeans.predict(1.22))
+
+# walk testing data
+
+# we gotta use the first reference skeleton data which is stored in the variables SpineX, SpineY, SpineZ, linesOne
+
+answer_testing_1 = []
+
+for i in range(len(testing_list_1)):
+    filename = file_prefix + str(testing_list_1[i]) + '.txt'
+    print (filename)
+
+    lines = open(filename).read().splitlines()
+    print (lines[0])
+
+    flag = 0
+    print (len(lines))
+    for j in range(10, (len(lines) - 29)):
+        spineLineNumber = 30 + flag
+        if spineLineNumber > len(lines):
+            break
+
+        spineLine = lines[spineLineNumber]
+        spineLineArray = spineLine.split(',')
+
+        spineTempX = num(spineLineArray[0])
+        spineTempY = num(spineLineArray[1])
+        spineTempZ = num(spineLineArray[2])
+
+        diffX = spineTempX - spineX
+        diffY = spineTempY - spineY
+        diffZ = spineTempZ - spineZ
+
+        tempSum = 0
+
+        for k in range(0, 20):
+            listOne = linesOne[k].split(',')
+
+            listTwo = lines[k + 20 + flag].split(',')
+
+            tempSum += (((num(listTwo[0]) - num(diffX)) - num(listOne[0])) ** (2) + (
+                (num(listTwo[1]) - num(diffY)) - num(listOne[1])) ** (2) + (
+                            (num(listTwo[2]) - num(diffZ)) - num(listOne[2])) ** (2)) ** (0.5)
+
+        # print tempSum
+
+        j += 20
+        flag += 20
+        answer_testing_1.append((kmeans.predict(tempSum))[0])
+
+print (linesOne)
+
+print (answer_testing_1)

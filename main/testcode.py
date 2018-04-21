@@ -573,11 +573,8 @@ for i in range(len(testing_list_2)):
     print(test_probability_10)
 
 print (linesOne)
-print("\n")
 
 print (answer_testing_1)
-
-print("\n")
 
 # computing probabilities using the all the action model matrices.
 

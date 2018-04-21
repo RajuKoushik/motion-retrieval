@@ -42,7 +42,7 @@ answer = [] * 1000000000
 
 listOne = [] * 10000
 
-linesOne = [0] * 100
+linesOne = [0] * 10000
 
 # lines one has the first reference skeleton
 
@@ -114,7 +114,7 @@ numpyArray = array(answer)
 
 numArray = numpyArray.reshape(-1, 1)
 
-kmeans = KMeans(n_clusters=100, random_state=0).fit(numArray)
+kmeans = KMeans(n_clusters=150, random_state=0).fit(numArray)
 
 print (kmeans.labels_)
 label = kmeans.labels_
@@ -150,7 +150,7 @@ for p in range(0, len(random_list)):
 
 counter_walk = sum_walk / 20
 
-walk_model = [[0] * 100 for i in range(100)]
+walk_model = [[0] * 200 for i in range(200)]
 
 for l in range(1, int(counter_walk)):
     walk_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_walk
@@ -177,7 +177,7 @@ for p in range(0, len(random_list)):
 
 counter_grab = sum_grab / 20
 
-grab_model = [[0] * 100 for i in range(100)]
+grab_model = [[0] * 200 for i in range(200)]
 
 for l in range(total_sum, total_sum + int(counter_grab)):
     grab_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_grab
@@ -204,7 +204,7 @@ for p in range(0, len(random_list)):
 
 counter_watch = sum_watch / 20
 
-watch_model = [[0] * 100 for i in range(100)]
+watch_model = [[0] * 200 for i in range(200)]
 
 for l in range(total_sum, total_sum + int(counter_watch)):
     watch_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_watch
@@ -231,7 +231,7 @@ for p in range(0, len(random_list)):
 
 counter_head = sum_head / 20
 
-head_model = [[0] * 100 for i in range(100)]
+head_model = [[0] * 200 for i in range(200)]
 
 for l in range(total_sum, total_sum + int(counter_head)):
     head_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_head
@@ -258,7 +258,7 @@ for p in range(0, len(random_list)):
 
 counter_phone = sum_phone / 20
 
-phone_model = [[0] * 100 for i in range(100)]
+phone_model = [[0] * 200 for i in range(200)]
 
 for l in range(total_sum, total_sum + int(counter_phone)):
     phone_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_phone
@@ -285,7 +285,7 @@ for p in range(0, len(random_list)):
 
 counter_arms = sum_arms / 20
 
-arms_model = [[0] * 100 for i in range(100)]
+arms_model = [[0] * 200 for i in range(200)]
 
 for l in range(total_sum, total_sum + int(counter_arms)):
     arms_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_arms
@@ -312,7 +312,7 @@ for p in range(0, len(random_list)):
 
 counter_seat = sum_seat / 20
 
-seat_model = [[0] * 100 for i in range(100)]
+seat_model = [[0] * 200 for i in range(200)]
 
 for l in range(total_sum, total_sum + int(counter_seat)):
     seat_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_seat
@@ -339,7 +339,7 @@ for p in range(0, len(random_list)):
 
 counter_punch = sum_punch / 20
 
-punch_model = [[0] * 100 for i in range(100)]
+punch_model = [[0] * 200 for i in range(200)]
 
 for l in range(total_sum, total_sum + int(counter_punch)):
     punch_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_punch
@@ -366,7 +366,7 @@ for p in range(0, len(random_list)):
 
 counter_kick = sum_kick / 20
 
-kick_model = [[0] * 100 for i in range(100)]
+kick_model = [[0] * 200 for i in range(200)]
 
 for l in range(total_sum, total_sum + int(counter_kick)):
     kick_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_kick
@@ -391,7 +391,7 @@ for p in range(0, len(random_list) - 5):
 
 counter_wave = sum_wave / 20
 
-wave_model = [[0] * 100 for i in range(100)]
+wave_model = [[0] * 200 for i in range(200)]
 
 for l in range(total_sum, total_sum + int(counter_wave)):
     wave_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_wave
@@ -589,7 +589,7 @@ print (answer_testing_1)
 
 
 
-Outfile = open("output.txt", "a+")
+Outfile = open("20180420_k_150_action_sequences.txt", "a+")
 
 for i in range(1, 401):
 

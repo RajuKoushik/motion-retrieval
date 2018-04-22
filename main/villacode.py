@@ -114,7 +114,7 @@ numpyArray = array(answer)
 
 numArray = numpyArray.reshape(-1, 1)
 
-kmeans = KMeans(n_clusters=150, random_state=0).fit(numArray)
+kmeans = KMeans(n_clusters=100, random_state=0).fit(numArray)
 
 print (kmeans.labels_)
 label = kmeans.labels_
@@ -448,7 +448,7 @@ print(kmeans.predict(1.22))
 
 # we gotta use the first reference skeleton data which is stored in the variables SpineX, SpineY, SpineZ, linesOne
 
-
+probabilities_max = []
 
 for i in range(len(testing_list_1)):
 
@@ -582,69 +582,27 @@ for i in range(len(testing_list_1)):
     print(test_probability_9)
     print(test_probability_10)
 
+    probabilities_max.append(
+        [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
+         test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
+
 print (linesOne)
 
 print (answer_testing_1)
 
-# creating the sequences
+# calculating accuracy
 
+counter_probability = 0
 
+for i in range(0, len(probabilities_max)):
+    if max(probabilities_max[i]) == probabilities_max[i][0]:
+        counter_probability += 1
+    print(max(probabilities_max[i]))
+    print(probabilities_max[i][0])
 
-Outfile = open("20180420_k_150_action_sequences.txt", "a+")
-
-for i in range(1, 401):
-
-    answer_testing_1 = []
-
-    filename = file_prefix + str(i) + '.txt'
-    print (filename)
-
-    lines = open(filename).read().splitlines()
-    print (lines[0])
-
-    array_sequence = []
-
-    flag = 0
-    print (len(lines))
-    for j in range(10, (len(lines) - 29)):
-        spineLineNumber = 30 + flag
-        if spineLineNumber > len(lines):
-            break
-
-        spineLine = lines[spineLineNumber]
-        spineLineArray = spineLine.split(',')
-
-        spineTempX = num(spineLineArray[0])
-        spineTempY = num(spineLineArray[1])
-        spineTempZ = num(spineLineArray[2])
-
-        diffX = spineTempX - spineX
-        diffY = spineTempY - spineY
-        diffZ = spineTempZ - spineZ
-
-        tempSum = 0
-
-        for k in range(0, 20):
-            listOne = linesOne[k].split(',')
-
-            listTwo = lines[k + 20 + flag].split(',')
-
-            tempSum += (((num(listTwo[0]) - num(diffX)) - num(listOne[0])) ** (2) + (
-                (num(listTwo[1]) - num(diffY)) - num(listOne[1])) ** (2) + (
-                            (num(listTwo[2]) - num(diffZ)) - num(listOne[2])) ** (2)) ** (0.5)
-
-        # print tempSum
-
-        j += 20
-        flag += 20
-
-        array_sequence.append((kmeans.predict(tempSum))[0])
-
-    print(array_sequence)
-
-    Outfile.write(str(filename))
-    Outfile.write("\n")
-    Outfile.write(str(array_sequence))
-    Outfile.write("\n")
-
-Outfile.close()
+print('accuracy')
+print(counter_probability)
+print('-----')
+print(len(probabilities_max))
+print('==')
+print(counter_probability / len(probabilities_max))

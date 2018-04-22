@@ -606,3 +606,648 @@ print('-----')
 print(len(probabilities_max))
 print('==')
 print(counter_probability / len(probabilities_max))
+
+print('accuracy of 2nd model')
+
+#2
+probabilities_max_2 = []
+
+for i in range(len(testing_list_2)):
+
+    answer_testing_1 = []
+
+    filename = file_prefix + str(testing_list_2[i]) + '.txt'
+    print (filename)
+
+    lines = open(filename).read().splitlines()
+    print (lines[0])
+
+    flag = 0
+    print (len(lines))
+    for j in range(10, (len(lines) - 29)):
+        spineLineNumber = 30 + flag
+        if spineLineNumber > len(lines):
+            break
+
+        spineLine = lines[spineLineNumber]
+        spineLineArray = spineLine.split(',')
+
+        spineTempX = num(spineLineArray[0])
+        spineTempY = num(spineLineArray[1])
+        spineTempZ = num(spineLineArray[2])
+
+        diffX = spineTempX - spineX
+        diffY = spineTempY - spineY
+        diffZ = spineTempZ - spineZ
+
+        tempSum = 0
+
+        for k in range(0, 20):
+            listOne = linesOne[k].split(',')
+
+            listTwo = lines[k + 20 + flag].split(',')
+
+            tempSum += (((num(listTwo[0]) - num(diffX)) - num(listOne[0])) ** (2) + (
+                (num(listTwo[1]) - num(diffY)) - num(listOne[1])) ** (2) + (
+                            (num(listTwo[2]) - num(diffZ)) - num(listOne[2])) ** (2)) ** (0.5)
+
+        # print tempSum
+
+        j += 20
+        flag += 20
+        answer_testing_1.append((kmeans.predict(tempSum))[0])
+
+    test_probability_1 = 1
+    test_probability_2 = 1
+    test_probability_3 = 1
+    test_probability_4 = 1
+    test_probability_5 = 1
+    test_probability_6 = 1
+    test_probability_7 = 1
+    test_probability_8 = 1
+    test_probability_9 = 1
+    test_probability_10 = 1
+
+    for l in range(1, len(answer_testing_1)):
+
+        if ((walk_model[answer_testing_1[l]][answer_testing_1[l - 1]]) * 1000000 != 0.000):
+            test_probability_1 = test_probability_1 + math.log(
+                walk_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+            print(test_probability_1)
+
+        else:
+            test_probability_1 = test_probability_1 + math.log((0.0001))
+
+        if ((grab_model[answer_testing_1[l]][answer_testing_1[l - 1]]) * 10000000 != 0.000):
+            test_probability_2 = test_probability_2 + math.log(
+                grab_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_2 = test_probability_2 + math.log((0.0001))
+
+        if ((watch_model[answer_testing_1[l]][answer_testing_1[l - 1]]) * 100000 != 0.000):
+            test_probability_3 = test_probability_3 + math.log(
+                watch_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_3 = test_probability_3 + math.log((0.0001))
+
+        if (head_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_4 = test_probability_4 + math.log(
+                head_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_4 = test_probability_4 + math.log((0.0001))
+
+        if (phone_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_5 = test_probability_5 + math.log(
+                phone_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_5 = test_probability_5 + math.log((0.0001))
+
+        if (arms_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_6 = test_probability_6 + math.log(
+                arms_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_6 = test_probability_6 + math.log((0.0001))
+
+        if (seat_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_7 = test_probability_7 + math.log(
+                seat_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_7 = test_probability_7 + math.log((0.0001))
+
+        if (punch_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_8 = test_probability_8 + math.log(
+                punch_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_8 = test_probability_8 + math.log((0.0001))
+
+        if (kick_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.0000):
+            test_probability_9 = test_probability_9 + math.log(
+                kick_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_9 = test_probability_9 + math.log((0.0001))
+
+        if (wave_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.00000):
+            test_probability_10 = test_probability_10 + math.log(
+                wave_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_10 = test_probability_10 + math.log((0.0001))
+
+    print('Printing the probablilities')
+    print(test_probability_1)
+    print(test_probability_2)
+    print(test_probability_3)
+    print(test_probability_4)
+    print(test_probability_5)
+    print(test_probability_6)
+    print(test_probability_7)
+    print(test_probability_8)
+    print(test_probability_9)
+    print(test_probability_10)
+
+    probabilities_max.append(
+        [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
+         test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
+
+print (linesOne)
+
+print (answer_testing_1)
+
+# calculating accuracy
+
+counter_probability = 0
+
+for i in range(0, len(probabilities_max_2)):
+    if max(probabilities_max_2[i]) == probabilities_max_2[i][1]:
+        counter_probability += 1
+    print(max(probabilities_max_2[i]))
+    print(probabilities_max_2[i][1])
+
+print('accuracy')
+print(counter_probability)
+print('-----')
+print(len(probabilities_max_2))
+print('==')
+print(counter_probability / len(probabilities_max_2))
+
+
+#3
+probabilities_max_3 = []
+
+for i in range(len(testing_list_3)):
+
+    answer_testing_1 = []
+
+    filename = file_prefix + str(testing_list_3[i]) + '.txt'
+    print (filename)
+
+    lines = open(filename).read().splitlines()
+    print (lines[0])
+
+    flag = 0
+    print (len(lines))
+    for j in range(10, (len(lines) - 29)):
+        spineLineNumber = 30 + flag
+        if spineLineNumber > len(lines):
+            break
+
+        spineLine = lines[spineLineNumber]
+        spineLineArray = spineLine.split(',')
+
+        spineTempX = num(spineLineArray[0])
+        spineTempY = num(spineLineArray[1])
+        spineTempZ = num(spineLineArray[2])
+
+        diffX = spineTempX - spineX
+        diffY = spineTempY - spineY
+        diffZ = spineTempZ - spineZ
+
+        tempSum = 0
+
+        for k in range(0, 20):
+            listOne = linesOne[k].split(',')
+
+            listTwo = lines[k + 20 + flag].split(',')
+
+            tempSum += (((num(listTwo[0]) - num(diffX)) - num(listOne[0])) ** (2) + (
+                (num(listTwo[1]) - num(diffY)) - num(listOne[1])) ** (2) + (
+                            (num(listTwo[2]) - num(diffZ)) - num(listOne[2])) ** (2)) ** (0.5)
+
+        # print tempSum
+
+        j += 20
+        flag += 20
+        answer_testing_1.append((kmeans.predict(tempSum))[0])
+
+    test_probability_1 = 1
+    test_probability_2 = 1
+    test_probability_3 = 1
+    test_probability_4 = 1
+    test_probability_5 = 1
+    test_probability_6 = 1
+    test_probability_7 = 1
+    test_probability_8 = 1
+    test_probability_9 = 1
+    test_probability_10 = 1
+
+    for l in range(1, len(answer_testing_1)):
+
+        if ((walk_model[answer_testing_1[l]][answer_testing_1[l - 1]]) * 1000000 != 0.000):
+            test_probability_1 = test_probability_1 + math.log(
+                walk_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+            print(test_probability_1)
+
+        else:
+            test_probability_1 = test_probability_1 + math.log((0.0001))
+
+        if ((grab_model[answer_testing_1[l]][answer_testing_1[l - 1]]) * 10000000 != 0.000):
+            test_probability_2 = test_probability_2 + math.log(
+                grab_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_2 = test_probability_2 + math.log((0.0001))
+
+        if ((watch_model[answer_testing_1[l]][answer_testing_1[l - 1]]) * 100000 != 0.000):
+            test_probability_3 = test_probability_3 + math.log(
+                watch_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_3 = test_probability_3 + math.log((0.0001))
+
+        if (head_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_4 = test_probability_4 + math.log(
+                head_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_4 = test_probability_4 + math.log((0.0001))
+
+        if (phone_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_5 = test_probability_5 + math.log(
+                phone_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_5 = test_probability_5 + math.log((0.0001))
+
+        if (arms_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_6 = test_probability_6 + math.log(
+                arms_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_6 = test_probability_6 + math.log((0.0001))
+
+        if (seat_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_7 = test_probability_7 + math.log(
+                seat_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_7 = test_probability_7 + math.log((0.0001))
+
+        if (punch_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_8 = test_probability_8 + math.log(
+                punch_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_8 = test_probability_8 + math.log((0.0001))
+
+        if (kick_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.0000):
+            test_probability_9 = test_probability_9 + math.log(
+                kick_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_9 = test_probability_9 + math.log((0.0001))
+
+        if (wave_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.00000):
+            test_probability_10 = test_probability_10 + math.log(
+                wave_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_10 = test_probability_10 + math.log((0.0001))
+
+    print('Printing the probablilities')
+    print(test_probability_1)
+    print(test_probability_2)
+    print(test_probability_3)
+    print(test_probability_4)
+    print(test_probability_5)
+    print(test_probability_6)
+    print(test_probability_7)
+    print(test_probability_8)
+    print(test_probability_9)
+    print(test_probability_10)
+
+    probabilities_max.append(
+        [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
+         test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
+
+print (linesOne)
+
+print (answer_testing_1)
+
+# calculating accuracy
+
+counter_probability = 0
+
+for i in range(0, len(probabilities_max_3)):
+    if max(probabilities_max_3[i]) == probabilities_max_3[i][2]:
+        counter_probability += 1
+    print(max(probabilities_max_3[i]))
+    print(probabilities_max_3[i][2])
+
+print('accuracy')
+print(counter_probability)
+print('-----')
+print(len(probabilities_max_3))
+print('==')
+print(counter_probability / len(probabilities_max_3))
+
+
+#4
+probabilities_max_4 = []
+
+for i in range(len(testing_list_4)):
+
+    answer_testing_1 = []
+
+    filename = file_prefix + str(testing_list_4[i]) + '.txt'
+    print (filename)
+
+    lines = open(filename).read().splitlines()
+    print (lines[0])
+
+    flag = 0
+    print (len(lines))
+    for j in range(10, (len(lines) - 29)):
+        spineLineNumber = 30 + flag
+        if spineLineNumber > len(lines):
+            break
+
+        spineLine = lines[spineLineNumber]
+        spineLineArray = spineLine.split(',')
+
+        spineTempX = num(spineLineArray[0])
+        spineTempY = num(spineLineArray[1])
+        spineTempZ = num(spineLineArray[2])
+
+        diffX = spineTempX - spineX
+        diffY = spineTempY - spineY
+        diffZ = spineTempZ - spineZ
+
+        tempSum = 0
+
+        for k in range(0, 20):
+            listOne = linesOne[k].split(',')
+
+            listTwo = lines[k + 20 + flag].split(',')
+
+            tempSum += (((num(listTwo[0]) - num(diffX)) - num(listOne[0])) ** (2) + (
+                (num(listTwo[1]) - num(diffY)) - num(listOne[1])) ** (2) + (
+                            (num(listTwo[2]) - num(diffZ)) - num(listOne[2])) ** (2)) ** (0.5)
+
+        # print tempSum
+
+        j += 20
+        flag += 20
+        answer_testing_1.append((kmeans.predict(tempSum))[0])
+
+    test_probability_1 = 1
+    test_probability_2 = 1
+    test_probability_3 = 1
+    test_probability_4 = 1
+    test_probability_5 = 1
+    test_probability_6 = 1
+    test_probability_7 = 1
+    test_probability_8 = 1
+    test_probability_9 = 1
+    test_probability_10 = 1
+
+    for l in range(1, len(answer_testing_1)):
+
+        if ((walk_model[answer_testing_1[l]][answer_testing_1[l - 1]]) * 1000000 != 0.000):
+            test_probability_1 = test_probability_1 + math.log(
+                walk_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+            print(test_probability_1)
+
+        else:
+            test_probability_1 = test_probability_1 + math.log((0.0001))
+
+        if ((grab_model[answer_testing_1[l]][answer_testing_1[l - 1]]) * 10000000 != 0.000):
+            test_probability_2 = test_probability_2 + math.log(
+                grab_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_2 = test_probability_2 + math.log((0.0001))
+
+        if ((watch_model[answer_testing_1[l]][answer_testing_1[l - 1]]) * 100000 != 0.000):
+            test_probability_3 = test_probability_3 + math.log(
+                watch_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_3 = test_probability_3 + math.log((0.0001))
+
+        if (head_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_4 = test_probability_4 + math.log(
+                head_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_4 = test_probability_4 + math.log((0.0001))
+
+        if (phone_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_5 = test_probability_5 + math.log(
+                phone_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_5 = test_probability_5 + math.log((0.0001))
+
+        if (arms_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_6 = test_probability_6 + math.log(
+                arms_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_6 = test_probability_6 + math.log((0.0001))
+
+        if (seat_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_7 = test_probability_7 + math.log(
+                seat_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_7 = test_probability_7 + math.log((0.0001))
+
+        if (punch_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_8 = test_probability_8 + math.log(
+                punch_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_8 = test_probability_8 + math.log((0.0001))
+
+        if (kick_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.0000):
+            test_probability_9 = test_probability_9 + math.log(
+                kick_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_9 = test_probability_9 + math.log((0.0001))
+
+        if (wave_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.00000):
+            test_probability_10 = test_probability_10 + math.log(
+                wave_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_10 = test_probability_10 + math.log((0.0001))
+
+    print('Printing the probablilities')
+    print(test_probability_1)
+    print(test_probability_2)
+    print(test_probability_3)
+    print(test_probability_4)
+    print(test_probability_5)
+    print(test_probability_6)
+    print(test_probability_7)
+    print(test_probability_8)
+    print(test_probability_9)
+    print(test_probability_10)
+
+    probabilities_max.append(
+        [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
+         test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
+
+print (linesOne)
+
+print (answer_testing_1)
+
+# calculating accuracy
+
+counter_probability = 0
+
+for i in range(0, len(probabilities_max_4)):
+    if max(probabilities_max_4[i]) == probabilities_max_4[i][3]:
+        counter_probability += 1
+    print(max(probabilities_max_4[i]))
+    print(probabilities_max_4[i][3])
+
+print('accuracy')
+print(counter_probability)
+print('-----')
+print(len(probabilities_max_4))
+print('==')
+print(counter_probability / len(probabilities_max_4))
+
+
+#5
+probabilities_max_5 = []
+
+for i in range(len(testing_list_5)):
+
+    answer_testing_1 = []
+
+    filename = file_prefix + str(testing_list_5[i]) + '.txt'
+    print (filename)
+
+    lines = open(filename).read().splitlines()
+    print (lines[0])
+
+    flag = 0
+    print (len(lines))
+    for j in range(10, (len(lines) - 29)):
+        spineLineNumber = 30 + flag
+        if spineLineNumber > len(lines):
+            break
+
+        spineLine = lines[spineLineNumber]
+        spineLineArray = spineLine.split(',')
+
+        spineTempX = num(spineLineArray[0])
+        spineTempY = num(spineLineArray[1])
+        spineTempZ = num(spineLineArray[2])
+
+        diffX = spineTempX - spineX
+        diffY = spineTempY - spineY
+        diffZ = spineTempZ - spineZ
+
+        tempSum = 0
+
+        for k in range(0, 20):
+            listOne = linesOne[k].split(',')
+
+            listTwo = lines[k + 20 + flag].split(',')
+
+            tempSum += (((num(listTwo[0]) - num(diffX)) - num(listOne[0])) ** (2) + (
+                (num(listTwo[1]) - num(diffY)) - num(listOne[1])) ** (2) + (
+                            (num(listTwo[2]) - num(diffZ)) - num(listOne[2])) ** (2)) ** (0.5)
+
+        # print tempSum
+
+        j += 20
+        flag += 20
+        answer_testing_1.append((kmeans.predict(tempSum))[0])
+
+    test_probability_1 = 1
+    test_probability_2 = 1
+    test_probability_3 = 1
+    test_probability_4 = 1
+    test_probability_5 = 1
+    test_probability_6 = 1
+    test_probability_7 = 1
+    test_probability_8 = 1
+    test_probability_9 = 1
+    test_probability_10 = 1
+
+    for l in range(1, len(answer_testing_1)):
+
+        if ((walk_model[answer_testing_1[l]][answer_testing_1[l - 1]]) * 1000000 != 0.000):
+            test_probability_1 = test_probability_1 + math.log(
+                walk_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+            print(test_probability_1)
+
+        else:
+            test_probability_1 = test_probability_1 + math.log((0.0001))
+
+        if ((grab_model[answer_testing_1[l]][answer_testing_1[l - 1]]) * 10000000 != 0.000):
+            test_probability_2 = test_probability_2 + math.log(
+                grab_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_2 = test_probability_2 + math.log((0.0001))
+
+        if ((watch_model[answer_testing_1[l]][answer_testing_1[l - 1]]) * 100000 != 0.000):
+            test_probability_3 = test_probability_3 + math.log(
+                watch_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_3 = test_probability_3 + math.log((0.0001))
+
+        if (head_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_4 = test_probability_4 + math.log(
+                head_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_4 = test_probability_4 + math.log((0.0001))
+
+        if (phone_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_5 = test_probability_5 + math.log(
+                phone_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_5 = test_probability_5 + math.log((0.0001))
+
+        if (arms_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_6 = test_probability_6 + math.log(
+                arms_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_6 = test_probability_6 + math.log((0.0001))
+
+        if (seat_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_7 = test_probability_7 + math.log(
+                seat_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_7 = test_probability_7 + math.log((0.0001))
+
+        if (punch_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.000):
+            test_probability_8 = test_probability_8 + math.log(
+                punch_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_8 = test_probability_8 + math.log((0.0001))
+
+        if (kick_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.0000):
+            test_probability_9 = test_probability_9 + math.log(
+                kick_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_9 = test_probability_9 + math.log((0.0001))
+
+        if (wave_model[answer_testing_1[l]][answer_testing_1[l - 1]] != 0.00000):
+            test_probability_10 = test_probability_10 + math.log(
+                wave_model[answer_testing_1[l]][answer_testing_1[l - 1]])
+        else:
+            test_probability_10 = test_probability_10 + math.log((0.0001))
+
+    print('Printing the probablilities')
+    print(test_probability_1)
+    print(test_probability_2)
+    print(test_probability_3)
+    print(test_probability_4)
+    print(test_probability_5)
+    print(test_probability_6)
+    print(test_probability_7)
+    print(test_probability_8)
+    print(test_probability_9)
+    print(test_probability_10)
+
+    probabilities_max.append(
+        [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
+         test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
+
+print (linesOne)
+
+print (answer_testing_1)
+
+# calculating accuracy
+
+counter_probability = 0
+
+for i in range(0, len(probabilities_max_5)):
+    if max(probabilities_max_5[i]) == probabilities_max_5[i][4]:
+        counter_probability += 1
+    print(max(probabilities_max_5[i]))
+    print(probabilities_max_5[i][4])
+
+print('accuracy')
+print(counter_probability)
+print('-----')
+print(len(probabilities_max_5))
+print('==')
+print(counter_probability / len(probabilities_max_5))

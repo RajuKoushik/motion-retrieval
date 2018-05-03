@@ -70,9 +70,16 @@ for i in range(0, len(random_list)):
 
     flag = 0
     print (len(lines))
-    for j in range(10, (len(lines) - 29)):
-        spineLineNumber = 30 + flag
-        if spineLineNumber > len(lines):
+    for j in range(10, (len(lines))):
+        if i == 0:
+
+            spineLineNumber = 30 + flag
+            print (spineLineNumber)
+        else:
+            spineLineNumber = 10 + flag
+            print (spineLineNumber)
+
+        if spineLineNumber > (len(lines)):
             break
 
         spineLine = lines[spineLineNumber]
@@ -95,7 +102,13 @@ for i in range(0, len(random_list)):
         for k in range(0, 20):
             listOne = linesOne[k].split(',')
 
-            listTwo = lines[k + 20 + flag].split(',')
+            if i == 0:
+
+                listTwo = lines[k + 20 + flag].split(',')
+                print(str(k + 20 + flag) + "knkjkjk")
+            else:
+                listTwo = lines[k + 0 + flag].split(',')
+                print(str(k + 0 + flag) + "bento")
 
             tempSum += (((num(listTwo[0]) - num(diffX)) - num(listOne[0])) ** (2) + (
                 (num(listTwo[1]) - num(diffY)) - num(listOne[1])) ** (2) + (
@@ -114,7 +127,7 @@ numpyArray = array(answer)
 
 numArray = numpyArray.reshape(-1, 1)
 
-kmeans = KMeans(n_clusters=100, random_state=0).fit(numArray)
+kmeans = KMeans(n_clusters=69, random_state=0).fit(numArray)
 
 print (kmeans.labels_)
 label = kmeans.labels_
@@ -148,12 +161,12 @@ for p in range(0, len(random_list)):
     sub_length_walk = len(lines)
     sum_walk += sub_length_walk
 
-counter_walk = sum_walk / 20
+counter_walk = (sum_walk / 20) - 1
 
 walk_model = [[0] * 200 for i in range(200)]
 
-for l in range(1, int(counter_walk)):
-    walk_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_walk
+for l in range(1, int(counter_walk) + 1):
+    walk_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += (1 / counter_walk)
 
 print (walk_model)
 
@@ -164,7 +177,7 @@ total_sum = total_sum + int(counter_walk)
 sum_grab = 0
 
 for p in range(0, len(random_list)):
-    if (random_list[p] >= 40 and random_list[p] < 80):
+    if (random_list[p] > 40 and random_list[p] <= 80):
         filename = file_prefix + str(random_list[p]) + '.txt'
         print (filename)
 
@@ -179,7 +192,7 @@ counter_grab = sum_grab / 20
 
 grab_model = [[0] * 200 for i in range(200)]
 
-for l in range(total_sum, total_sum + int(counter_grab)):
+for l in range(total_sum, total_sum + int(counter_grab) + 1):
     grab_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_grab
 
 print (grab_model)
@@ -191,7 +204,7 @@ total_sum = total_sum + int(counter_grab)
 sum_watch = 0
 
 for p in range(0, len(random_list)):
-    if (random_list[p] >= 80 and random_list[p] < 120):
+    if (random_list[p] > 80 and random_list[p] <= 120):
         filename = file_prefix + str(random_list[p]) + '.txt'
         print (filename)
 
@@ -206,7 +219,7 @@ counter_watch = sum_watch / 20
 
 watch_model = [[0] * 200 for i in range(200)]
 
-for l in range(total_sum, total_sum + int(counter_watch)):
+for l in range(total_sum, total_sum + int(counter_watch) + 1):
     watch_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_watch
 
 print (watch_model)
@@ -218,7 +231,7 @@ total_sum = total_sum + int(counter_watch)
 sum_head = 0
 
 for p in range(0, len(random_list)):
-    if (random_list[p] >= 120 and random_list[p] < 160):
+    if (random_list[p] > 120 and random_list[p] <= 160):
         filename = file_prefix + str(random_list[p]) + '.txt'
         print (filename)
 
@@ -233,7 +246,7 @@ counter_head = sum_head / 20
 
 head_model = [[0] * 200 for i in range(200)]
 
-for l in range(total_sum, total_sum + int(counter_head)):
+for l in range(total_sum, total_sum + int(counter_head) + 1):
     head_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_head
 
 print (head_model)
@@ -245,7 +258,7 @@ total_sum = total_sum + int(counter_head)
 sum_phone = 0
 
 for p in range(0, len(random_list)):
-    if (random_list[p] >= 160 and random_list[p] < 200):
+    if (random_list[p] > 160 and random_list[p] <= 200):
         filename = file_prefix + str(random_list[p]) + '.txt'
         print (filename)
 
@@ -260,7 +273,7 @@ counter_phone = sum_phone / 20
 
 phone_model = [[0] * 200 for i in range(200)]
 
-for l in range(total_sum, total_sum + int(counter_phone)):
+for l in range(total_sum, total_sum + int(counter_phone) + 1):
     phone_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_phone
 
 print (phone_model)
@@ -272,7 +285,7 @@ total_sum = total_sum + int(counter_phone)
 sum_arms = 0
 
 for p in range(0, len(random_list)):
-    if (random_list[p] >= 200 and random_list[p] < 240):
+    if (random_list[p] > 200 and random_list[p] <= 240):
         filename = file_prefix + str(random_list[p]) + '.txt'
         print (filename)
 
@@ -287,7 +300,7 @@ counter_arms = sum_arms / 20
 
 arms_model = [[0] * 200 for i in range(200)]
 
-for l in range(total_sum, total_sum + int(counter_arms)):
+for l in range(total_sum, total_sum + int(counter_arms)+1):
     arms_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_arms
 
 print (arms_model)
@@ -299,7 +312,7 @@ total_sum = total_sum + int(counter_arms)
 sum_seat = 0
 
 for p in range(0, len(random_list)):
-    if (random_list[p] >= 240 and random_list[p] < 280):
+    if (random_list[p] > 240 and random_list[p] <= 280):
         filename = file_prefix + str(random_list[p]) + '.txt'
         print (filename)
 
@@ -314,7 +327,7 @@ counter_seat = sum_seat / 20
 
 seat_model = [[0] * 200 for i in range(200)]
 
-for l in range(total_sum, total_sum + int(counter_seat)):
+for l in range(total_sum, total_sum + int(counter_seat) + 1):
     seat_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_seat
 
 print (seat_model)
@@ -326,7 +339,7 @@ total_sum = total_sum + int(counter_seat)
 sum_punch = 0
 
 for p in range(0, len(random_list)):
-    if (random_list[p] >= 280 and random_list[p] < 320):
+    if (random_list[p] > 280 and random_list[p] <= 320):
         filename = file_prefix + str(random_list[p]) + '.txt'
         print (filename)
 
@@ -341,7 +354,7 @@ counter_punch = sum_punch / 20
 
 punch_model = [[0] * 200 for i in range(200)]
 
-for l in range(total_sum, total_sum + int(counter_punch)):
+for l in range(total_sum, total_sum + int(counter_punch) + 1):
     punch_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_punch
 
 print (punch_model)
@@ -353,7 +366,7 @@ total_sum = total_sum + int(counter_punch)
 sum_kick = 0
 
 for p in range(0, len(random_list)):
-    if (random_list[p] >= 320 and random_list[p] < 360):
+    if (random_list[p] > 320 and random_list[p] <= 360):
         filename = file_prefix + str(random_list[p]) + '.txt'
         print (filename)
 
@@ -380,7 +393,7 @@ total_sum = total_sum + int(counter_kick)
 sum_wave = 0
 
 for p in range(0, len(random_list) - 5):
-    if (random_list[p] >= 360 and random_list[p] < 399):
+    if (random_list[p] > 360 and random_list[p] <= 400):
         filename = file_prefix + str(random_list[p]) + '.txt'
         print (filename)
 
@@ -393,7 +406,7 @@ counter_wave = sum_wave / 20
 
 wave_model = [[0] * 200 for i in range(200)]
 
-for l in range(total_sum, total_sum + int(counter_wave)):
+for l in range(total_sum, total_sum + int(counter_wave) + 1):
     wave_model[kmeans.labels_[l]][kmeans.labels_[l - 1]] += 1 / counter_wave
 
 print (wave_model)
@@ -570,25 +583,25 @@ for i in range(len(testing_list_1)):
         else:
             test_probability_10 = test_probability_10 + math.log((0.0001))
 
-    print('Printing the probablilities')
-    print(test_probability_1)
-    print(test_probability_2)
-    print(test_probability_3)
-    print(test_probability_4)
-    print(test_probability_5)
-    print(test_probability_6)
-    print(test_probability_7)
-    print(test_probability_8)
-    print(test_probability_9)
-    print(test_probability_10)
+    # print('Printing the probablilities')
+    # print(test_probability_1)
+    # print(test_probability_2)
+    # print(test_probability_3)
+    # print(test_probability_4)
+    # print(test_probability_5)
+    # print(test_probability_6)
+    # print(test_probability_7)
+    # print(test_probability_8)
+    # print(test_probability_9)
+    # print(test_probability_10)
 
     probabilities_max.append(
         [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
          test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
 
-print (linesOne)
+# print (linesOne)
 
-print (answer_testing_1)
+# print (answer_testing_1)
 
 # calculating accuracy
 
@@ -732,25 +745,25 @@ for i in range(len(testing_list_2)):
         else:
             test_probability_10 = test_probability_10 + math.log((0.0001))
 
-    print('Printing the probablilities')
-    print(test_probability_1)
-    print(test_probability_2)
-    print(test_probability_3)
-    print(test_probability_4)
-    print(test_probability_5)
-    print(test_probability_6)
-    print(test_probability_7)
-    print(test_probability_8)
-    print(test_probability_9)
-    print(test_probability_10)
+    # print('Printing the probablilities')
+    # print(test_probability_1)
+    # print(test_probability_2)
+    # print(test_probability_3)
+    # print(test_probability_4)
+    # print(test_probability_5)
+    # print(test_probability_6)
+    # print(test_probability_7)
+    # print(test_probability_8)
+    # print(test_probability_9)
+    # print(test_probability_10)
 
-    probabilities_max.append(
+    probabilities_max_2.append(
         [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
          test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
 
-print (linesOne)
+# print (linesOne)
 
-print (answer_testing_1)
+# print (answer_testing_1)
 
 # calculating accuracy
 
@@ -892,25 +905,25 @@ for i in range(len(testing_list_3)):
         else:
             test_probability_10 = test_probability_10 + math.log((0.0001))
 
-    print('Printing the probablilities')
-    print(test_probability_1)
-    print(test_probability_2)
-    print(test_probability_3)
-    print(test_probability_4)
-    print(test_probability_5)
-    print(test_probability_6)
-    print(test_probability_7)
-    print(test_probability_8)
-    print(test_probability_9)
-    print(test_probability_10)
+    # print('Printing the probablilities')
+    # print(test_probability_1)
+    # print(test_probability_2)
+    # print(test_probability_3)
+    # print(test_probability_4)
+    # print(test_probability_5)
+    # print(test_probability_6)
+    # print(test_probability_7)
+    # print(test_probability_8)
+    # print(test_probability_9)
+    # print(test_probability_10)
 
-    probabilities_max.append(
+    probabilities_max_3.append(
         [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
          test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
 
-print (linesOne)
+# print (linesOne)
 
-print (answer_testing_1)
+# print (answer_testing_1)
 
 # calculating accuracy
 
@@ -1052,25 +1065,25 @@ for i in range(len(testing_list_4)):
         else:
             test_probability_10 = test_probability_10 + math.log((0.0001))
 
-    print('Printing the probablilities')
-    print(test_probability_1)
-    print(test_probability_2)
-    print(test_probability_3)
-    print(test_probability_4)
-    print(test_probability_5)
-    print(test_probability_6)
-    print(test_probability_7)
-    print(test_probability_8)
-    print(test_probability_9)
-    print(test_probability_10)
+    # print('Printing the probablilities')
+    # print(test_probability_1)
+    # print(test_probability_2)
+    # print(test_probability_3)
+    # print(test_probability_4)
+    # print(test_probability_5)
+    # print(test_probability_6)
+    # print(test_probability_7)
+    # print(test_probability_8)
+    # print(test_probability_9)
+    # print(test_probability_10)
 
-    probabilities_max.append(
+    probabilities_max_4.append(
         [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
          test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
 
-print (linesOne)
+# print (linesOne)
 
-print (answer_testing_1)
+# print (answer_testing_1)
 
 # calculating accuracy
 
@@ -1212,25 +1225,25 @@ for i in range(len(testing_list_5)):
         else:
             test_probability_10 = test_probability_10 + math.log((0.0001))
 
-    print('Printing the probablilities')
-    print(test_probability_1)
-    print(test_probability_2)
-    print(test_probability_3)
-    print(test_probability_4)
-    print(test_probability_5)
-    print(test_probability_6)
-    print(test_probability_7)
-    print(test_probability_8)
-    print(test_probability_9)
-    print(test_probability_10)
+    # print('Printing the probablilities')
+    # print(test_probability_1)
+    # print(test_probability_2)
+    # print(test_probability_3)
+    # print(test_probability_4)
+    # print(test_probability_5)
+    # print(test_probability_6)
+    # print(test_probability_7)
+    # print(test_probability_8)
+    # print(test_probability_9)
+    # print(test_probability_10)
 
-    probabilities_max.append(
+    probabilities_max_5.append(
         [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
          test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
 
-print (linesOne)
+# print (linesOne)
 
-print (answer_testing_1)
+# print (answer_testing_1)
 
 # calculating accuracy
 
@@ -1372,25 +1385,25 @@ for i in range(len(testing_list_6)):
         else:
             test_probability_10 = test_probability_10 + math.log((0.0001))
 
-    print('Printing the probablilities')
-    print(test_probability_1)
-    print(test_probability_2)
-    print(test_probability_3)
-    print(test_probability_4)
-    print(test_probability_5)
-    print(test_probability_6)
-    print(test_probability_7)
-    print(test_probability_8)
-    print(test_probability_9)
-    print(test_probability_10)
+    # print('Printing the probablilities')
+    # print(test_probability_1)
+    # print(test_probability_2)
+    # print(test_probability_3)
+    # print(test_probability_4)
+    # print(test_probability_5)
+    # print(test_probability_6)
+    # print(test_probability_7)
+    # print(test_probability_8)
+    # print(test_probability_9)
+    # print(test_probability_10)
 
-    probabilities_max.append(
+    probabilities_max_6.append(
         [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
          test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
 
-print (linesOne)
+# print (linesOne)
 
-print (answer_testing_1)
+# print (answer_testing_1)
 
 # calculating accuracy
 
@@ -1532,25 +1545,25 @@ for i in range(len(testing_list_7)):
         else:
             test_probability_10 = test_probability_10 + math.log((0.0001))
 
-    print('Printing the probablilities')
-    print(test_probability_1)
-    print(test_probability_2)
-    print(test_probability_3)
-    print(test_probability_4)
-    print(test_probability_5)
-    print(test_probability_6)
-    print(test_probability_7)
-    print(test_probability_8)
-    print(test_probability_9)
-    print(test_probability_10)
+    # print('Printing the probablilities')
+    # print(test_probability_1)
+    # print(test_probability_2)
+    # print(test_probability_3)
+    # print(test_probability_4)
+    # print(test_probability_5)
+    # print(test_probability_6)
+    # print(test_probability_7)
+    # print(test_probability_8)
+    # print(test_probability_9)
+    # print(test_probability_10)
 
-    probabilities_max.append(
+    probabilities_max_7.append(
         [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
          test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
 
-print (linesOne)
+# print (linesOne)
 
-print (answer_testing_1)
+# print (answer_testing_1)
 
 # calculating accuracy
 
@@ -1692,25 +1705,25 @@ for i in range(len(testing_list_8)):
         else:
             test_probability_10 = test_probability_10 + math.log((0.0001))
 
-    print('Printing the probablilities')
-    print(test_probability_1)
-    print(test_probability_2)
-    print(test_probability_3)
-    print(test_probability_4)
-    print(test_probability_5)
-    print(test_probability_6)
-    print(test_probability_7)
-    print(test_probability_8)
-    print(test_probability_9)
-    print(test_probability_10)
+    # print('Printing the probablilities')
+    # print(test_probability_1)
+    # print(test_probability_2)
+    # print(test_probability_3)
+    # print(test_probability_4)
+    # print(test_probability_5)
+    # print(test_probability_6)
+    # print(test_probability_7)
+    # print(test_probability_8)
+    # print(test_probability_9)
+    # print(test_probability_10)
 
-    probabilities_max.append(
+    probabilities_max_8.append(
         [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
          test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
 
-print (linesOne)
+# print (linesOne)
 
-print (answer_testing_1)
+# print (answer_testing_1)
 
 # calculating accuracy
 
@@ -1852,25 +1865,25 @@ for i in range(len(testing_list_9)):
         else:
             test_probability_10 = test_probability_10 + math.log((0.0001))
 
-    print('Printing the probablilities')
-    print(test_probability_1)
-    print(test_probability_2)
-    print(test_probability_3)
-    print(test_probability_4)
-    print(test_probability_5)
-    print(test_probability_6)
-    print(test_probability_7)
-    print(test_probability_8)
-    print(test_probability_9)
-    print(test_probability_10)
+    # print('Printing the probablilities')
+    # print(test_probability_1)
+    # print(test_probability_2)
+    # print(test_probability_3)
+    # print(test_probability_4)
+    # print(test_probability_5)
+    # print(test_probability_6)
+    # print(test_probability_7)
+    # print(test_probability_8)
+    # print(test_probability_9)
+    # print(test_probability_10)
 
-    probabilities_max.append(
+    probabilities_max_9.append(
         [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
          test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
 
-print (linesOne)
+# print (linesOne)
 
-print (answer_testing_1)
+# print (answer_testing_1)
 
 # calculating accuracy
 
@@ -1888,7 +1901,6 @@ print('-----')
 print(len(probabilities_max_9))
 print('==')
 print(counter_probability / len(probabilities_max_9))
-
 
 # 10
 probabilities_max_10 = []
@@ -2013,25 +2025,25 @@ for i in range(len(testing_list_10)):
         else:
             test_probability_10 = test_probability_10 + math.log((0.0001))
 
-    print('Printing the probablilities')
-    print(test_probability_1)
-    print(test_probability_2)
-    print(test_probability_3)
-    print(test_probability_4)
-    print(test_probability_5)
-    print(test_probability_6)
-    print(test_probability_7)
-    print(test_probability_8)
-    print(test_probability_9)
-    print(test_probability_10)
+    # print('Printing the probablilities')
+    # print(test_probability_1)
+    # print(test_probability_2)
+    # print(test_probability_3)
+    # print(test_probability_4)
+    # print(test_probability_5)
+    # print(test_probability_6)
+    # print(test_probability_7)
+    # print(test_probability_8)
+    # print(test_probability_9)
+    # print(test_probability_10)
 
-    probabilities_max.append(
+    probabilities_max_10.append(
         [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
          test_probability_6, test_probability_7, test_probability_8, test_probability_9, test_probability_10])
 
-print (linesOne)
+# print (linesOne)
 
-print (answer_testing_1)
+# print (answer_testing_1)
 
 # calculating accuracy
 

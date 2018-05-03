@@ -12,8 +12,6 @@ from sklearn.cluster import KMeans
 
 import math
 
-import dlib
-
 sys.path.append("../tools/")
 import pylab as pl
 
@@ -52,6 +50,8 @@ spineX = 0
 spineY = 0
 spineZ = 0
 
+list_action = []
+
 for i in range(0, len(random_list)):
     filename = file_prefix + str(random_list[i]) + '.txt'
     print (filename)
@@ -59,60 +59,26 @@ for i in range(0, len(random_list)):
     lines = open(filename).read().splitlines()
     print (lines[0])
 
-    if i == 0:
-        def_spine_line = lines[10]
-        def_spine_first = def_spine_line.split(',')
-
-        spineX = num(def_spine_first[0])
-        spineY = num(def_spine_first[1])
-        spineZ = num(def_spine_first[2])
-        print ('enter the dragon')
-        for ii in range(0, 20):
-            linesOne[ii] = lines[ii]
-
     flag = 0
-    print (len(lines))
-    for j in range(10, (len(lines) - 29)):
-        spineLineNumber = 30 + flag
-        if spineLineNumber > len(lines):
-            break
 
-        spineLine = lines[spineLineNumber]
-        spineLineArray = spineLine.split(',')
+    for j in range(int(len(lines) / 20) - 20):
 
-        spineTempX = num(spineLineArray[0])
-        spineTempY = num(spineLineArray[1])
-        spineTempZ = num(spineLineArray[2])
+        tempSum = 0.00
 
-        diffX = spineTempX - spineX
-        diffY = spineTempY - spineY
-        diffZ = spineTempZ - spineZ
+        for k in range(0, 19):
+            line1 = lines[k + flag].split(',')
+            line2 = lines[k + 20 + flag].split(',')
 
-        coordinateX = [] * 1000
-        coordinateY = [] * 1000
-        coordinateZ = [] * 1000
+            tempSum = tempSum + ((num(line1[0]) - num(line2[0])) ** 2 + (num(line1[1]) - num(line2[1])) ** 2 + (
+                num(line1[2]) - num(line2[2])) ** 2) ** (0.5)
 
-        tempSum = 0
+        list_action.append(tempSum)
 
-        for k in range(0, 20):
-            listOne = linesOne[k].split(',')
+        flag = flag + 20
 
-            listTwo = lines[k + 20 + flag].split(',')
+numpyArray = array(list_action)
 
-            tempSum += (((num(listTwo[0]) - num(diffX)) - num(listOne[0])) ** (2) + (
-                (num(listTwo[1]) - num(diffY)) - num(listOne[1])) ** (2) + (
-                            (num(listTwo[2]) - num(diffZ)) - num(listOne[2])) ** (2)) ** (0.5)
-
-        # print tempSum
-
-        j += 20
-        flag += 20
-
-        answer.append(tempSum)
-# print (answer)
-print (linesOne)
-
-numpyArray = array(answer)
+print (len(list_action))
 
 numArray = numpyArray.reshape(-1, 1)
 
@@ -452,49 +418,32 @@ print(kmeans.predict(1.22))
 
 probabilities_max = []
 
-for i in range(len(testing_list_2)):
+for i in range(len(testing_list_1)):
 
     answer_testing_1 = []
 
-    filename = file_prefix + str(testing_list_2[i]) + '.txt'
+    filename = file_prefix + str(random_list[i]) + '.txt'
     print (filename)
 
     lines = open(filename).read().splitlines()
     print (lines[0])
 
     flag = 0
-    print (len(lines))
-    for j in range(10, (len(lines) - 29)):
-        spineLineNumber = 30 + flag
-        if spineLineNumber > len(lines):
-            break
 
-        spineLine = lines[spineLineNumber]
-        spineLineArray = spineLine.split(',')
+    for j in range(int(len(lines) / 20) - 20):
 
-        spineTempX = num(spineLineArray[0])
-        spineTempY = num(spineLineArray[1])
-        spineTempZ = num(spineLineArray[2])
+        tempSum = 0.00
 
-        diffX = spineTempX - spineX
-        diffY = spineTempY - spineY
-        diffZ = spineTempZ - spineZ
+        for k in range(0, 19):
+            line1 = lines[k + flag].split(',')
+            line2 = lines[k + 20 + flag].split(',')
 
-        tempSum = 0
+            tempSum = tempSum + ((num(line1[0]) - num(line2[0])) ** 2 + (num(line1[1]) - num(line2[1])) ** 2 + (
+                num(line1[2]) - num(line2[2])) ** 2) ** (0.5)
 
-        for k in range(0, 20):
-            listOne = linesOne[k].split(',')
+        list_action.append(tempSum)
 
-            listTwo = lines[k + 20 + flag].split(',')
-
-            tempSum += (((num(listTwo[0]) - num(diffX)) - num(listOne[0])) ** (2) + (
-                (num(listTwo[1]) - num(diffY)) - num(listOne[1])) ** (2) + (
-                            (num(listTwo[2]) - num(diffZ)) - num(listOne[2])) ** (2)) ** (0.5)
-
-        # print tempSum
-
-        j += 20
-        flag += 20
+        flag = flag + 20
         answer_testing_1.append((kmeans.predict(tempSum))[0])
 
     test_probability_1 = 1
@@ -572,17 +521,17 @@ for i in range(len(testing_list_2)):
         else:
             test_probability_10 = test_probability_10 + math.log((0.0001))
 
-    print('Printing the probablilities')
-    print(test_probability_1)
-    print(test_probability_2)
-    print(test_probability_3)
-    print(test_probability_4)
-    print(test_probability_5)
-    print(test_probability_6)
-    print(test_probability_7)
-    print(test_probability_8)
-    print(test_probability_9)
-    print(test_probability_10)
+    # print('Printing the probablilities')
+    # print(test_probability_1)
+    # print(test_probability_2)
+    # print(test_probability_3)
+    # print(test_probability_4)
+    # print(test_probability_5)
+    # print(test_probability_6)
+    # print(test_probability_7)
+    # print(test_probability_8)
+    # print(test_probability_9)
+    # print(test_probability_10)
 
     probabilities_max.append(
         [test_probability_1, test_probability_2, test_probability_3, test_probability_4, test_probability_5,
@@ -597,10 +546,10 @@ for i in range(len(testing_list_2)):
 counter_probability = 0
 
 for i in range(0, len(probabilities_max)):
-    if max(probabilities_max[i]) == probabilities_max[i][1]:
+    if max(probabilities_max[i]) == probabilities_max[i][0]:
         counter_probability += 1
     print(max(probabilities_max[i]))
-    print(probabilities_max[i][1])
+    print(probabilities_max[i][0])
 
 print('accuracy')
 print(counter_probability)
